@@ -25,9 +25,9 @@ apply plugin: 'org.ajoberstar.release-opinion'
 release {
     grgit = Grgit.open(project.file('.'))
 
-//    defaultVersionStrategy = Strategies.SNAPSHOT
-    versionStrategy Strategies.SNAPSHOT
-    versionStrategy Strategies.FINAL
+    defaultVersionStrategy = Strategies.SNAPSHOT
+//    versionStrategy Strategies.SNAPSHOT
+//    versionStrategy Strategies.FINAL
 
 
 }
@@ -39,6 +39,16 @@ publishing {
         maven {
             // change to point to your repo, e.g. http://my.org/repo
             url "$buildDir/repo"
+        }
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            version project.version
+            from components.java
         }
     }
 }
