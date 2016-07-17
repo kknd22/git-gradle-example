@@ -13,6 +13,7 @@ apply plugin: 'java'
 //apply plugin: 'application'
 
 import org.ajoberstar.grgit.Grgit
+import org.ajoberstar.grgit.Credentials
 import org.ajoberstar.gradle.git.release.opinion.Strategies
 
 group 'dummy'
@@ -21,9 +22,11 @@ apply plugin: 'org.ajoberstar.grgit'
 apply plugin: 'org.ajoberstar.release-opinion'
 //apply plugin: 'org.ajoberstar.release-base'
 
+logger.lifecycle " grgitUsername is ${grgitUsername}"
 
 release {
-    grgit = Grgit.open(project.file('.'))
+
+    grgit = Grgit.open(dir: project.file('.'), creds: new Credentials(username: grgitUsername, password: grgitPassword))
 
     defaultVersionStrategy = Strategies.SNAPSHOT
 //    versionStrategy Strategies.SNAPSHOT
